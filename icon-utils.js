@@ -1,8 +1,6 @@
-const express = require('express');
 const OAuth = require('oauth');
 const { noun_project_key, noun_project_secret } = require('./flags');
 
-const router = express.Router();
 
 const oauth = new OAuth.OAuth(
   'https://api.thenounproject.com',
@@ -13,12 +11,6 @@ const oauth = new OAuth.OAuth(
   null,
   'HMAC-SHA1'
 );
-
-router.get('/', async (req, res) => {
-  const iconList = req.query.icons.split(',');
-  const iconUris = (await Promise.all(iconList.map(getIconUris))).flat();
-  res.json(iconUris.filter(uri => !!uri));
-});
 
 async function getIconUris(iconName) {
   const {promise, resolve, reject} = Promise.withResolvers();
@@ -38,4 +30,4 @@ async function getIconUris(iconName) {
   return promise;
 }
 
-module.exports = router;
+module.exports = getIconUris;
