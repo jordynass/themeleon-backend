@@ -3,6 +3,8 @@ const cors = require('cors');
 const themeRoute = require('./theme-route');
 const { port } = require('./flags');
 
+require('dotenv').config();
+
 const app = express();
 app.use(cors());
 
