@@ -19,7 +19,6 @@ async function getIconUris(iconName) {
   oauth.get(fullQuery, null, null, (e, data) => {
     try {
       const jsonData = JSON.parse(data);
-      console.log(`Noun project response for ${iconName}: ${JSON.stringify(jsonData, null, 2)}`);
       const iconUris = jsonData.icons.map(icon => icon.thumbnail_url);
       console.log(`Top icons URIs for ${iconName}: ${JSON.stringify(iconUris)}`);
       resolve(iconUris);
